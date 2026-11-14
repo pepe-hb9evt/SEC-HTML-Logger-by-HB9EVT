@@ -16,7 +16,7 @@ exportiert das Log für die Einreichung.
 Alle Funktionen sind in `design/Funktionsbeschreibung.md` beschrieben. Jede Bestimmung hat
 eine eindeutige Nummer `Dnnn`. Der Programmcode verweist in Kommentaren auf diese Nummern.
 
-Die offenen Punkte stehen in Kapitel 15 der Funktionsbeschreibung (D109-D110).
+Die offenen Punkte stehen in Kapitel 17 „Offene Punkte“ der Funktionsbeschreibung (Nummern `D9nn`).
 
 <br>
 

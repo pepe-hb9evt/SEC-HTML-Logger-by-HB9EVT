@@ -9,6 +9,14 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 The program is under development. There is no working version yet.
 Details about the project are in `DOCUMENTATION.md`.
 
+The specification (see next chapter) of the planned app comprises 193 items:
+
+- 22 project rules (see `CLAUDE.md`)
+- 150 items on functionality (see `design/Funktionsbeschreibung.md`)
+- 21 items on technical requirements (see `design/Technische-Umsetzung.md`).
+
+Based on this, the app is now being programmed.
+
 <br>
 
 ## Spec-Driven Development with an AI

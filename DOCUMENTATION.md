@@ -16,7 +16,7 @@ exports the log for submission.
 All functions are described in `design/Funktionsbeschreibung.md`. Each requirement has
 a unique number `Dnnn`. The program code refers to these numbers in comments.
 
-The open points are listed in chapter 15 of the functional specification (D109-D110).
+The open points are listed in chapter 17 "Offene Punkte" of the functional specification (numbers `D9nn`).
 
 <br>
 
