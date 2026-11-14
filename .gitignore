@@ -1,0 +1,29 @@
+# Allow-list: ignore everything, then allow each file explicitly (see CLAUDE.md C29)
+*
+!*/
+
+# Root
+!.gitignore
+!LICENSE
+!CLAUDE.md
+!README.md
+!README_deutsch_german.md
+!DOCUMENTATION.md
+!DOCUMENTATION_deutsch_german.md
+!CHANGELOG_deutsch_german.md
+
+# Data
+!data/README.md
+!data/sec-zip-list.csv
+!data/SEC2026_Relais-Liste.csv
+!data/SEC2026_Relais-Liste.md
+!data/raw/ortschaftenverzeichnis_plz_2056.csv.zip
+!data/raw/ortschaftenverzeichnis_plz_4326.csv.zip
+
+# Design
+!design/Funktionsbeschreibung.md
+!design/Technische-Umsetzung.md
+
+# Reference documents
+!docs/reference/README.md
+!docs/reference/Reglement-SEC-2026-DE.pdf

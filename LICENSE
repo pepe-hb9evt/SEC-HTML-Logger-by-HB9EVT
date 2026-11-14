@@ -1,0 +1,50 @@
+MIT License
+
+Copyright (c) 2026 Pepe HB9EVT
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+Third-party material
+====================
+
+The MIT License above applies only to the author's own work (program code,
+helper scripts and own documents). The following third-party material is
+NOT covered by it and remains under its own terms:
+
+1. Postal code data (swisstopo)
+   Files: data/raw/ortschaftenverzeichnis_plz_2056.csv.zip,
+          data/raw/ortschaftenverzeichnis_plz_4326.csv.zip,
+          data/sec-zip-list.csv (derived from the 2056 file)
+   Source: Federal Office of Topography swisstopo, "Amtliches
+           Ortschaftenverzeichnis mit Postleitzahl und Perimeter"
+   Terms:  Open Government Data - free use, also commercial;
+           source attribution required.
+   Attribution: (c) swisstopo
+
+2. Relay list SEC 2026
+   Files: data/SEC2026_Relais-Liste.csv, data/SEC2026_Relais-Liste.md
+   Source: relay list of the SEC logging app for the Swiss Emergency
+           Contest (USKA), transcribed from a screen video.
+   Terms:  Rights not yet clarified. Not licensed under MIT.
+
+3. Reference documents
+   Files: docs/reference/*
+   Source: third parties (e.g. contest rules of the USKA).
+   Terms:  Copyright of the respective owners. Not licensed under MIT.
