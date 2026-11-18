@@ -4,6 +4,7 @@
 
 # Root
 !.gitignore
+!SEC-Logger-by-HB9EVT.html
 !LICENSE
 !CLAUDE.md
 !README.md

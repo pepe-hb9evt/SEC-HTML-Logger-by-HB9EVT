@@ -10,7 +10,7 @@
 | D004 | MAJOR wird erhöht, wenn sich das Format der Sicherungsdatei so ändert, dass ältere Sicherungsdateien nicht mehr eingelesen werden können. MINOR wird bei neuen Funktionen erhöht, PATCH bei Fehlerkorrekturen. |
 | D005 | Die Versionsnummer steht an genau einer Stelle im Programmcode. Sie wird in der Administrations-Ansicht und in der Statuszeile angezeigt und in die Sicherungsdatei, in den ADIF-Export (Feld `PROGRAMVERSION`) und in jeden Eintrag des Changelogs geschrieben. Git-Tags setzt der Benutzer selbst (vgl. C21). |
 | D006 | In diesem Dokument hat jede Bestimmung eine eindeutige Nummer `Dnnn` (oder `DnnnX`). Sie dient zur Referenzierung in Begleitdokumenten und im Code. |
-| D007 | Dieses Dokument setzt voraus, dass der Leser die üblichen Fachbegriffe des Amateurfunks kennt, Contest-Erfahrung hat und mit dem Swiss Emergency Contest (SEC) und seinem eigenartigen Regelwerk (HBT anstatt UTC, CSV-Datei anstatt ADIF- oder Cabrillo-Datei, usw.) vertraut ist. |
+| D007 | Dieses Dokument setzt voraus, dass der Leser die üblichen Fachbegriffe des Amateurfunks kennt, Contest-Erfahrung hat und mit dem Swiss Emergency Contest (SEC) und seinem eigenartigen Regelwerk (vgl. D009A) vertraut ist. |
 | D008 | Bestimmungen mit dem Vermerk (Wunsch) beschreiben eine erwünschte, aber nicht zwingende Funktion. Alle übrigen Bestimmungen sind Pflicht. |
 
 ---
@@ -22,6 +22,7 @@
 | Nr. | Funktion |
 |---|---|
 | D009 | Das Programm dient zur Erfassung der Funkverbindungen (QSOs) im Swiss Emergency Contest (SEC) der USKA. |
+| D009A | Eine Neuentwicklung ist notwendig, weil die üblichen Amateurfunk-Log-Programme die exotischen Eigenheiten des SEC nicht unterstützen, wie zum Beispiel: <br />-- Uhrzeit in Lokalzeit loggen anstatt in UTC; <br />-- CB-Band wird mit CB-Rufzeichen ebenfalls genutzt; <br />-- Log-Daten sind als CSV-Datei zur Auswertung einzureichen anstelle des bei Contests üblichen ADIF- oder Cabrillo-Formats. |
 | D010 | Das Programm ist schlank. Es enthält nur Funktionen, die D009 dienen. |
 | D011 | Das Programm erzeugt eine Log-Datei, die ohne Nachbearbeitung zur Auswertung eingereicht werden kann. |
 | D012 | Grundlagen sind das Manual V4 (2026-10-23) der SEC-App von Leander HB9RMW, das Contest-Reglement SEC 2026 der USKA (beide in `docs/reference/` abgelegt) sowie die eigenen Erfahrungen des Autors am SEC. |
@@ -50,12 +51,17 @@
 | Nr. | Funktion |
 |---|---|
 | D019 | Die Hauptansicht besteht aus der Eingabemaske für ein QSO im oberen Bereich, dem Log mit den bereits erfassten QSOs darunter, einem Meldungsbereich und einer Statuszeile. |
+| D019A | Oben links steht der Programmname „SEC-HTML-Logger by HB9EVT“. |
+| D019B | Rechts neben der Auswahl „Live Logging“ / „Post Logging“ wählt man die Sprache der Benutzeroberfläche: Deutsch oder Englisch. Beim ersten Start gilt die Sprache des Browsers; ist sie keine dieser Sprachen, gilt Englisch. Die gewählte Sprache bleibt gespeichert. Die Feldnamen des Contest-Logs (z. B. "Date", "His Call", "ZIP Rcvd", "MyCall") bleiben in jeder Sprache englisch. |
 | D020 | Neben der Hauptansicht gibt es die Ansicht Stationseinstellungen (Kapitel 6) und die Administrations-Ansicht, u. a. mit den Funktionen für Import und Export. |
 | D021 | Die Statuszeile zeigt die Anzahl QSOs, die Gesamtpunktzahl (nur bei Einzelstationen, vgl. D123), ob die letzte Speicherung erfolgreich war, den Status der Sicherungsdatei (D044), die gewählten Erfassungsmodi (Kapitel 9) und die Programmversion (D005). |
 | D022 | Die Darstellung passt sich der Breite des Browser-Tabs an. |
+| D022A | Das Element, das den Fokus hat, ist hellgrün umrahmt. |
 | D023 | Die Eingabemaske für ein QSO steht auf einer Zeile. Ist das Fenster zu schmal, wird sie auf zwei oder drei Zeilen verteilt. |
 | D024 | Im Log steht jedes QSO auf einer Zeile. Ist das Fenster zu schmal, erscheint ein horizontaler Scrollbalken, mit dem man das Log seitlich verschieben kann. |
-| D025 | Spalten des Logs in dieser Reihenfolge: "Nr.", "Date", "Time", "Band", "Mode", "TRX Route", "His Call", "RST Send", "ZIP Send", "RST Rcvd", "ZIP Rcvd", "Points", "QRB". |
+| D025 | Spalten des Logs in dieser Reihenfolge: "Nr.", "!", "Date", "Time", "Band", "Mode", "TRX Route", "His Call", "RST Send", "ZIP Send", "RST Rcvd", "ZIP Rcvd", "Points", "QRB". |
+| D025A | Liegt für ein QSO eine Warnung vor (Kapitel 11), steht in der Spalte "!" ein Buchstabe: „P“ bei abweichenden Postleitzahlen derselben Gegenstation (D115A), „C“ bei einem Rufzeichen mit anderem Vor- oder Zusatz (D115B), „X“ bei allen anderen Warnungen, „D“ bei einem Dupe (D111). Treffen mehrere zu, stehen alle in dieser Reihenfolge, durch Komma ohne Leerschlag getrennt (z. B. `P,C,D`). „D“ ist blau, die übrigen Buchstaben sind rot. |
+| D025B | Ein einfacher Klick auf die Buchstaben in der Spalte "!" zeigt die Warnungen dieses QSO im Meldungsbereich an, ohne das QSO in die Eingabemaske zu übernehmen (Ausnahme zu D110C). |
 | D026 | "ZIP Send" ist die eigene Postleitzahl ("MyZip", D072). In der Eingabemaske wird sie nur angezeigt und ist nicht veränderbar. |
 | D027 | Das Log ist nach Datum und Zeit sortiert. |
 | D028 | Ein neues oder geändertes QSO wird im Log an der richtigen Stelle nach Datum und Zeit einsortiert. |
@@ -65,8 +71,10 @@
 | D032 | Beim Ändern eines QSO zeigt die Eingabemaske die Nummer an, die das QSO vor dem erneuten Speichern hatte. |
 | D033 | Im Log steht die QSO-Nummer am linken Rand. |
 | D034 | Nach jedem Hinzufügen, Ändern oder Löschen eines QSO nummeriert das Programm das Log neu durch. |
-| D035 | Beim Start steht eine leere Eingabemaske bereit. Der Fokus liegt auf dem Feld "Band". |
+| D035 | Steht eine leere Eingabemaske für ein neues QSO bereit (beim Start und nach jedem Speichern), liegt der Fokus bei „Live Logging“ auf dem ersten leeren Feld, bei „Post Logging“ auf dem Feld "Time". |
 | D035A | Die Administrations-Ansicht zeigt die Quellenangabe für die Postleitzahl-Daten: „© swisstopo – Amtliches Ortschaftenverzeichnis mit Postleitzahl und Perimeter“. Sie ist nach den Nutzungsbedingungen von swisstopo (Open Government Data) Pflicht. |
+| D035B | Wird ein bestehendes QSO in die Eingabemaske übernommen (D098), liegt der Fokus auf dem Feld "Band". |
+| D035C | Mit der Tab-Taste springt der Fokus vom letzten Knopf der Eingabemaske zurück zum Feld "Date". |
 
 ---
 
@@ -80,17 +88,21 @@
 | D037 | Notfunkgruppen führen pro Station ein eigenes Log, unterschieden durch die Stationsnummer (D060). |
 | D038 | Jedes QSO wird sofort nach dem Erfassen dauerhaft gespeichert, als eigener Datensatz. |
 | D039 | Erst wenn das Speichern abgeschlossen ist, meldet das Programm „gespeichert“ und legt das nächste QSO zur Erfassung bereit. Bei einer Panne geht höchstens das QSO verloren, das gerade erfasst wird. |
-| D040 | Die Speicherdauer (vom Ende der Eingabe bis zur Meldung „gespeichert“) wird gemessen und in geeigneter Form in der Administrations-Ansicht angezeigt (z. B. Verlauf der letzten 20 Messungen). |
+| D040 | Die Speicherdauer (vom Ende der Eingabe bis zur Meldung „gespeichert“) wird gemessen und in der Administrations-Ansicht in dieser Form angezeigt: „Average: 5 ms --- Maximum: 7 ms --- Individual measurements (newest first): …“ (die letzten 20 Messungen). |
 | D041 | Wird das erfasste QSO zum Speichern freigegeben, muss die Eingabemaske innert höchstens 0.4 Sekunden wieder für die Eingabe bereitstehen. Kann diese Limite nicht dauernd eingehalten werden, sind zwingend Lösungen zu suchen. |
-| D042 | Zusätzliche Sicherungsdatei (optional): Der Benutzer kann eine Sicherungsdatei auf einem Datenträger wählen. Das Programm führt sie nach jedem QSO nach. |
+| D042 | Sicherungsdatei (Pflicht): Der Benutzer wählt eine Sicherungsdatei, am besten auf einem anderen Datenträger (z. B. USB-Stick). Das Programm führt sie nach jedem Speichern, Ändern und Löschen eines QSO nach. |
+| D042A | Solange keine Sicherungsdatei gewählt ist oder das Schreiben nicht bestätigt ist (D044), kann kein QSO erfasst oder geändert werden. Über der Eingabemaske steht dann ein Hinweis mit dem Knopf, der das Problem behebt („Choose backup file“ bzw. „Enable backup file“). Import und Wiederherstellung bleiben möglich. |
+| D042B | Schlägt das Schreiben der Sicherungsdatei fehl (z. B. USB-Stick entfernt), läuft die Erfassung weiter, weil jedes QSO im Browser gespeichert bleibt. Die Statuszeile zeigt den Fehler rot an, und im Meldungsbereich erscheint eine Warnung mit dem Knopf „Retry“. Beim nächsten erfolgreichen Schreiben wird das ganze Log nachgetragen. |
+| D042C | Die Statuszeile zeigt Zeit und Anzahl QSOs des letzten erfolgreichen Schreibens der Sicherungsdatei, z. B. „Backup file: OK, 09:41:12, 37 QSOs“. |
+| D042D | In der Administrations-Ansicht legt der Knopf „Download backup copy“ jederzeit eine zusätzliche Kopie der Sicherungsdatei im Download-Ordner ab. |
 | D043 | Format der Sicherungsdatei: JSON, UTF-8 ohne BOM, mit Formatversion, den Stationseinstellungen und allen QSOs. |
-| D044 | Nach einem Neustart von Chrome muss das Schreiben der Sicherungsdatei einmal bestätigt werden. Bis dahin zeigt das Programm einen Hinweis an. |
-| D045 | Beim Start lädt das Programm das gespeicherte Log. Ist kein Log vorhanden, aber eine Sicherungsdatei, bietet das Programm an, das Log daraus wiederherzustellen. |
+| D044 | Nach einem Neustart von Chrome muss das Schreiben der Sicherungsdatei einmal bestätigt werden. Bis dahin gilt D042A. |
+| D045 | Beim Start und nach dem Bestätigen der Sicherungsdatei vergleicht das Programm das Log im Browser mit der Sicherungsdatei. Enthält die Sicherungsdatei QSOs, die im Browser fehlen (z. B. weil Chrome Browserdaten gelöscht hat), bietet es an, diese zu ergänzen. Bis zum Entscheid wird die Sicherungsdatei nicht überschrieben, und die Erfassung ist gesperrt. |
 | D046 | In der Administrations-Ansicht kann eine Sicherungsdatei (D042, D043) eingelesen werden. Andere Dateien (z. B. die CSV-Datei, D128 und folgende) können nicht eingelesen werden. |
 | D047 | Für den Import gibt es zwei Knöpfe: „Ersetzen“ ersetzt das bestehende Log durch die Sicherungsdatei. „Ergänzen“ fügt die QSOs der Sicherungsdatei dem bestehenden Log hinzu; dabei gelten die Dupe-Prüfung (D111) und die Neunummerierung (D034). |
 | D048 | Vor jedem Import sichert das Programm das aktuelle Log automatisch. |
 | D049 | Ist die Datei ungültig, zeigt das Programm eine Fehlermeldung mit der Zeilennummer an. Das bestehende Log bleibt unverändert. |
-| D050 | Das Programm fordert bei Chrome dauerhaften Speicher an. Wird er nicht gewährt, zeigt das Programm eine Warnmeldung an. |
+| D050 | Das Programm fordert bei Chrome dauerhaften Speicher an, ohne Meldung. Chrome gewährt ihn für Dateien, die direkt von der Festplatte geöffnet werden, in der Regel nicht. Die Administrations-Ansicht zeigt den Zustand als Information an. Den Schutz vor Datenverlust bietet die Sicherungsdatei (D042). |
 | D051 | Läuft das Programm in einem Inkognito-Fenster, zeigt das Programm eine Warnmeldung an, weil die Daten beim Schliessen verloren gehen. |
 | D052 | Ist die Eingabemaske nicht leer oder wird gerade ein QSO geändert, warnt der Browser beim Schliessen des Tabs. |
 | D053 | Ist das Programm bereits in einem anderen Tab geöffnet, zeigt es einen Hinweis an und lässt keine Erfassung zu. |
@@ -105,12 +117,12 @@
 |---|---|
 | D054 | In der Ansicht Stationseinstellungen (D020) werden die Einstellungen zur eigenen Station vorgenommen. |
 | D055 | Das Programm speichert die Stationseinstellungen dauerhaft. Sie stehen nach einem Neustart wieder zur Verfügung. |
-| D056 | "MyCall": Das eigene Rufzeichen wird ohne Zusätze wie `/P` oder `/M` erfasst. |
+| D056 | "MyCall": Das eigene Rufzeichen. Das Rufzeichen oder der Gastlandpräfix muss mit `HB` oder `HE` beginnen (in seltenen Fällen vergibt das BAKOM auch Sonderrufzeichen, die mit "HE" beginnen). Einzelstationen dürfen Zusätze wie `/P` oder `/M` verwenden, Stationen im Gruppenbetrieb nicht. |
 | D057 | "MyZip": Die vierstellige Postleitzahl des Standorts wird aus der PLZ-Tabelle gewählt. |
 | D058 | "Gruppenbetrieb": Mit einer Ja/Nein-Einstellung wird festgelegt, ob die Station als Teil einer Notfunkgruppe arbeitet. |
-| D059 | "SEC Group Number": Bei Gruppenbetrieb erhält jede Station eine eigene Stationsnummer (1…n). |
+| D059 | "SEC Group Number": Bei Gruppenbetrieb erhält jede Station eine eigene Stationsnummer. Erlaubt sind die Zahlen 1 bis 9. |
 | D060 | Die Oberfläche schlägt folgende Stationsnummern vor: 1 = 80 m, 2 = 40 m, 3 = VHF bzw. VHF/UHF, 4 = UHF, 5 = CB. |
-| D061 | D056 bis D058 sind Pflichtfelder. Sind diese nicht vollständig ausgefüllt, kann kein QSO geloggt oder geändert werden. Ein Hinweistext macht darauf aufmerksam. Der Import ist hingegen möglich (siehe D046). |
+| D061 | D056 bis D059 sind Pflichtfelder. Sind diese nicht vollständig und gültig ausgefüllt, kann kein QSO geloggt oder geändert werden. Bei jedem Feld steht ein konkreter Hinweis, was fehlt oder falsch ist. Sind alle Angaben gültig, erscheint „Station settings are complete.“ in Grün. Der Import ist auch bei unvollständigen Angaben möglich (siehe D046). |
 | D062 | "used in Log": Das Programm bildet aus den Einstellungen das Rufzeichen für das Log: `MyCall` bei Einzelstationen, `MyCall/Nummer` bei Gruppenstationen (z. B. `MyCall/1`). |
 | D063 | Das Rufzeichen für den Funkbetrieb bleibt bei Gruppenstationen gleich. Die Stationsnummer dient nur dazu, die Logs bei der Auswertung zu unterscheiden. |
 
@@ -133,6 +145,10 @@
 | D072 | "MyZip": Eigene Postleitzahl. Wird automatisch aus den Stationseinstellungen übernommen. |
 | D073 | "RST Rcvd": Rapport, den man von der Gegenstation erhält. |
 | D074 | "ZIP Rcvd": Postleitzahl der Gegenstation, gewählt aus der PLZ-Tabelle. |
+| D074A | Fehlermeldungen zu "ZIP Rcvd": Steht keine 4-stellige Zahl im Feld (z. B. 1 bis 3 Ziffern oder ein Ortsname, der nicht aus der Liste gewählt wurde), lautet die Meldung „Die Postleitzahl muss 4-stellig sein.“ Erst bei einer 4-stelligen Zahl, die nicht in der PLZ-Tabelle steht, lautet sie „Postleitzahl nicht in der PLZ-Tabelle.“ |
+| D074B | Fehlermeldungen erscheinen so früh wie möglich, aber nicht während des Eintippens der Postleitzahl oder des Ortsnamens: Folgt in "ZIP Rcvd" innerhalb von drei Sekunden eine weitere Ziffer oder ein weiterer Buchstabe, erscheint „Die Postleitzahl muss 4-stellig sein.“ noch nicht. Erst wenn drei Sekunden lang nichts mehr eingetippt wird, wird die Meldung angezeigt. Verliert "ZIP Rcvd" den Fokus, wird die Meldung sofort angezeigt. Sobald die Postleitzahl 4-stellig ist, erscheint gegebenenfalls sofort „Postleitzahl nicht in der PLZ-Tabelle.“ Beim Speichern werden alle Fehler sofort angezeigt. |
+| D074C | Ist "ZIP Rcvd" fehlerhaft (D074A) und wurde das Rufzeichen ("His Call", ohne Vor- und Zusätze) schon in einem anderen QSO erfasst, wird der Fehlermeldung ein Hinweis angehängt, z. B. „"ZIP Rcvd": Die Postleitzahl muss 4-stellig sein. HB9SWR wurde früher mit 8918 erfasst (QSO Nr. 2486).“ (bzw. „später“, wenn das QSO später liegt). Dahinter steht ein Knopf „8918 übernehmen“, der diese Postleitzahl ins Feld schreibt. Die Warnung zur abweichenden Postleitzahl (D115A) erscheint in diesem Fall nicht; sie gilt nur für gültige Postleitzahlen. |
+| D074D | Auswahlliste zu "ZIP Rcvd" und "MyZip": Beim Eintippen erscheinen unter dem Feld zuoberst alle Einträge (Postleitzahl und Ortschaft), die mit der Eingabe beginnen (Postleitzahl oder Ortsname); darunter, durch einen Strich abgetrennt, die Einträge, die die Eingabe nur enthalten. Höchstens 150 Einträge. Pfeiltasten wählen einen Eintrag, Enter übernimmt ihn (und springt danach wie gewohnt weiter, D092), ein Mausklick übernimmt ihn ebenfalls. Esc schliesst nur die Liste. |
 | D075 | "RST Send" und "RST Rcvd" sind auf `59` voreingestellt. |
 | D076 | "MyCall": Eigenes Rufzeichen ("used in Log"). Wird automatisch aus den Stationseinstellungen übernommen. |
 | D077 | "Points": Punktwerte des QSO. Werden berechnet (siehe Kapitel 12). |
@@ -150,6 +166,7 @@
 | D080 | Band-Tabelle: Enthält die zulässigen Bänder 80 m, 40 m, 11 m (CB), 2 m und 70 cm. |
 | D081 | Mode-Tabelle: Enthält die zulässigen Betriebsarten SSB, FM und AM, je mit Bezeichnung und Punktfaktor. |
 | D082 | Relais-Tabelle: Enthält die zulässigen FM-Relais in CH/FL mit Name (Call, Standort, Frequenz), Sendefrequenz und Empfangsfrequenz sowie den Eintrag `DIRECT`. |
+| D082A | Kommt ein Relais-Name in der Relais-Liste mehrfach vor (z. B. wegen gekürzter Namen), wird bei diesen Relais die Empfangsfrequenz angehängt, z. B. „HB9DD Monte Generoso... 438.4375“. Dieser Name gilt als "TRX Route" und steht im Contest-Log in Spalte 6. |
 | D083 | PLZ-Tabelle: Enthält alle Postleitzahlen der Schweiz und Liechtensteins mit Ortsname. |
 | D084 | Für Relais-Verbindungen dürfen nur Relais aus der Relais-Tabelle verwendet werden. |
 | D085 | Die Relais-Tabelle kann nur in einem Admin-Bereich geändert werden. Vor unbedachten Änderungen wird gewarnt. |
@@ -165,10 +182,10 @@
 | D086 | Live Logging (Standard): Datum, Zeit, "MyCall" und "MyZip" werden beim Anlegen eines QSO automatisch gesetzt. Gedacht für die Erfassung live während des Contests. |
 | D087 | Im Live Logging werden Datum und Zeit aus der lokalen Systemzeit genommen. Ändert sich etwas im Feld "His Call", werden sie neu gesetzt. |
 | D088 | Post Logging: Alle Felder, auch Datum und Zeit, sind frei editierbar. Gedacht für die Nacherfassung von Papiernotizen nach dem Contest. |
-| D089 | Repeat Last (Standard): Beim Bestätigen eines leeren Feldes wird der Wert aus dem vorherigen QSO übernommen. Das gilt vor allem für "Band", "Mode", "TRX Route" und die Rapporte. |
+| D089 | Repeat Last (Standard): Die Eingabemaske für das nächste QSO wird mit "Band", "Mode" und "TRX Route" des vorherigen QSO vorbelegt. Zudem wird beim Bestätigen eines leeren Feldes mit Enter der Wert aus dem vorherigen QSO übernommen. |
 | D090 | No Repeat: Es werden keine Werte aus dem vorherigen QSO übernommen. |
-| D091 | Auto Next (Standard): Nach dem letzten Pflichtfeld ("ZIP Rcvd") wird das QSO gespeichert und sofort ein neues angelegt. |
-| D092 | Manual Next: Ein neues QSO wird erst auf ausdrücklichen Befehl angelegt. |
+| D091 | **[E]** *Entfernt in Version 0.03.00 (bisher „Auto Next“, siehe Kapitel 18). Anstelle der bisherigen Auswahl D091/D092 kommt nun D092 immer zur Anwendung*. |
+| D092 | Enter und Speichern: Hat das aktuelle Feld einen Fehler, bleibt der Fokus vorerst dort. Drückt der Benutzer erneut Enter, ohne das Feld geändert zu haben, springt der Fokus weiter. Sonst springt Enter zum nächsten Feld, das leer ist oder einen Fehler hat; die Suche läuft nach dem letzten Feld vorne weiter. Ein Feld mit einer Warnung (ausser Dupe, D110D) ist ebenfalls ein Sprungziel, sofern es nach dem aktuellen Feld liegt. Gibt es kein solches Feld, springt Enter auf den Knopf „Save“; das gilt auch, wenn „Save“ blau ist (D097A) oder nur ein Dupe vorliegt (D097B). Felder, die nicht bearbeitet werden können, werden übersprungen; ausgefüllte Felder erreicht man mit Tab oder per Mausklick. Mit „Repeat Last“ übernimmt Enter in einem leeren Feld zuerst den Wert des vorherigen QSO (D089). Gespeichert wird mit Enter auf „Save“ oder mit einem Klick darauf; danach steht eine neue Eingabemaske bereit. |
 | D093 | Das Programm merkt sich, welche Erfassungsmodi zuletzt gewählt waren. |
 | D094 | Die Route `DIRECT` kann direkt gewählt werden, ohne Suche in der Relais-Tabelle. |
 | D095 | Eingabe bereinigen: Leerzeichen am Anfang und am Ende einer Eingabe werden entfernt. Das Feld "His Call" wird in Grossbuchstaben umgewandelt. Vorsätze (z. B. `HB0/`) und Zusätze (z. B. `/P`) sind im Feld "His Call" erlaubt. |
@@ -183,10 +200,13 @@
 |---|---|
 | D096 | Ein neues QSO kann hinzugefügt werden. Es wird gemäss D028 einsortiert. |
 | D097 | Ein bestehendes QSO kann bearbeitet werden. Die Änderung kann gespeichert oder verworfen werden. Dafür gibt es anklickbare Knöpfe. Verwerfen ist zudem mit der Taste Esc möglich. |
+| D097A | Der Knopf „Save“ ist erst blau hinterlegt, wenn alle Pflichtfelder ausgefüllt sind und weder ein Fehler noch eine Warnung vorliegt. Speichern ist trotz Warnung möglich, auch mit der Enter-Taste (D107). |
+| D097B | Liegt ein Dupe vor (D111), heisst der Knopf „Save Dupe“ (im Edit-Modus „Save changes (Dupe)“). |
 | D098 | Mit einem Doppelklick auf eine Zeile im Log wird das QSO in die Eingabemaske übernommen und kann dort bearbeitet werden. |
 | D099 | Es ist klar erkennbar, ob in der Eingabemaske ein bestehendes QSO geändert oder ein neues QSO erfasst wird: Beim Ändern hat die Eingabemaske eine andere Hintergrundfarbe und zeigt die Nummer des QSO an. |
+| D099A | Im Edit-Modus zeigt das Programm die Warnungen zum übernommenen QSO wieder an. |
 | D100 | Beim Ändern eines bestehenden QSO werden Datum und Zeit nicht automatisch neu gesetzt, auch nicht im Live Logging. |
-| D101 | Ein QSO kann gelöscht werden. Das geschieht nach einer Rückfrage. |
+| D101 | Ein QSO kann gelöscht werden. Das geschieht nach einer Rückfrage. Bei dieser Rückfrage ist „No“ blau hinterlegt. |
 | D102 | Im Log kann man navigieren: zum ersten, letzten, vorherigen oder nächsten QSO sowie seitenweise. |
 | D103 | Das Programm zeigt die aktuelle Position und die Anzahl der QSOs an („QSO n of N“). |
 | D104 | Das Log kann nach Spalten gruppiert und mit einer Volltextsuche durchsucht werden. |
@@ -202,14 +222,22 @@
 | D105 | Fehler verhindern das Speichern, z. B. ein fehlendes Pflichtfeld (D064) oder ein Wert, der nicht in den Stammdaten (Kapitel 8) steht. |
 | D106 | Fehler werden schon während der Eingabe direkt beim betroffenen Feld angezeigt. |
 | D107 | Warnungen erscheinen gut sichtbar in roter Schrift. Sie verhindern das Weiterarbeiten nicht, z. B. das Speichern und das Erfassen des nächsten QSO. |
+| D107A | Warnungen erscheinen zum frühestmöglichen Zeitpunkt: sobald die betroffenen Felder ausgefüllt sind, nicht erst beim Speichern (z. B. „Mode AM is not allowed on 80 m“, sobald "Band" und "Mode" gewählt sind). |
 | D108 | Verstösse gegen die Plausibilitätsregeln (Kapitel 13) sind Warnungen. |
 | D109 | Alle Meldungen und Rückfragen des Programms erscheinen im Meldungsbereich (D019), nicht in eigenen Fenstern. Einzige Ausnahme ist die Warnung des Browsers beim Verlassen (D052). |
 | D110 | Eine offene Rückfrage verfällt, sobald der Benutzer etwas anderes macht. |
-| D111 | Das Programm meldet „Dupe“, wenn ein QSO mit derselben Kombination aus "Band", "TRX Route" und "His Call" bereits existiert. |
+| D110A | Der blau hinterlegte Knopf einer Rückfrage hat den Fokus und kann mit der Enter-Taste ausgelöst werden. |
+| D110B | Beim Wechsel der Ansicht (Log, Station, Administration) wird der Meldungsbereich geleert. |
+| D110C | Warnungen gelten nur für das QSO, das gerade in der Eingabemaske steht. Wird die Erfassung oder das Ändern eines QSO verlassen (Speichern, Verwerfen, Löschen), verschwinden seine Warnungen aus dem Meldungsbereich; im Log bleiben sie mit „D“ bzw. „X“ sichtbar (D025A). |
+| D110D | Liegt für das QSO in der Eingabemaske (neues QSO oder Edit-Modus) eine Warnung vor, erhält das betroffene Feld einen farbigen Rahmen: Dupe (D111) blau bei "His Call", "Band" und "TRX Route"; abweichende Postleitzahl (D115A) rot bei "ZIP Rcvd"; anderer Zusatz oder Präfix (D115B) rot bei "His Call"; Rufzeichen nicht HB oder HE (D115, D116) oder ungültiger Aufbau (D116A) rot bei "His Call"; HB3 auf 40 m (D124) rot bei "Band" (eigenes Rufzeichen) bzw. "His Call"; Relais nur in FM (D125) rot bei "TRX Route"; Band passt nicht zur Relaisfrequenz (D125A) rot bei "Band" und "TRX Route"; Mode nicht erlaubt (D126) rot bei "Mode"; geänderte eigene Postleitzahl (D127) rot bei "ZIP Send". Treffen rot und blau beim selben Feld zu, gilt rot. Der Rahmen erscheint und verschwindet zusammen mit der Warnung im Meldungsbereich (D107A, D110C). Der hellgrüne Fokusrahmen (D022A) bleibt sichtbar. |
+| D111 | Das Programm meldet „Dupe“, wenn ein QSO mit derselben Kombination aus "Band", "TRX Route" und "His Call" bereits existiert. Beim Rufzeichen werden Vor- und Zusätze ignoriert (z. B. gilt `HB9ZZA/P` als dieselbe Station wie `HB9ZZA`). Die Meldung nennt das vorhandene QSO in der Form „QSO Nr. n“. Das zeitlich erste dieser QSOs ist nie ein Dupe; die Warnung erscheint nur bei den späteren, auch im Edit-Modus. |
 | D112 | Erscheint die Warnmeldung „Dupe“, springt das Log zum bereits vorhandenen QSO und hebt dessen Zeile farbig hervor. |
 | D113 | Reglement, Direktverbindungen: Jede Station darf pro Band nur einmal direkt gearbeitet werden. |
 | D114 | Reglement, Relaisverbindungen: Jede Station darf pro Relais nur einmal gearbeitet werden. Über ein anderes Relais oder direkt darf sie nochmals gearbeitet werden. |
 | D115 | Das Programm warnt, wenn eine Verbindung keine neuen Punkte einbringt (vgl. D116 ff.). |
+| D115A | Wird ein Rufzeichen ("His Call") wiederholt erfasst, vergleicht das Programm die Postleitzahl ("ZIP Rcvd") mit den bisherigen QSOs dieses Rufzeichens; Vor- und Zusätze (z. B. `HB9/`, `/P`) werden dabei ignoriert. Weicht sie ab, erscheint eine Warnung mit der bisherigen Postleitzahl und der Nummer des QSO („QSO Nr. n“). Im Log werden alle QSOs dieses Rufzeichens mit „P“ gekennzeichnet (D025A). Erst wenn alle QSOs dieses Rufzeichens wieder dieselbe Postleitzahl haben, verschwinden die „P“. Liegt das genannte QSO zeitlich nach dem QSO in der Eingabemaske, heisst es in der Warnung „logged later“ statt „logged before“. |
+| D115C | Hinter der Warnung zu D115A steht ein Knopf „nnnn übernehmen“, der die Postleitzahl des genannten QSO in "ZIP Rcvd" schreibt. Danach setzt das Programm den Fokus wie mit Enter (D092). Dasselbe gilt für den Knopf zu D074C. |
+| D115B | Wird ein Rufzeichen mit einem anderen Vorsatz oder Zusatz erfasst, als es im Log bereits vorkommt (z. B. `HB9ZZA` und `HB9ZZA/P`), erscheint eine Warnung mit der bisherigen Schreibweise und der Nummer des QSO („QSO Nr. n“). Im Log werden alle QSOs dieses Rufzeichens mit „C“ gekennzeichnet (D025A), bis wieder alle dieselbe Schreibweise haben. Liegt das genannte QSO zeitlich nach dem QSO in der Eingabemaske, heisst es in der Warnung „logged later“ statt „logged before“. |
 
 ---
 
@@ -219,7 +247,10 @@
 
 | Nr. | Funktion |
 |---|---|
-| D116 | Es zählen nur QSOs mit Gegenstationen, deren Standort in CH/FL liegt. Das heisst: Das Rufzeichen muss mit `HB` beginnen, entweder der eigene Präfix oder der Gastlandpräfix (z. B. `HB9/…`). Sonst gibt es keine Punkte. |
+| D116 | Es zählen nur QSOs mit Gegenstationen, deren Standort in CH/FL liegt. Das heisst: Das Rufzeichen muss mit `HB` oder `HE` beginnen, entweder der eigene Präfix oder der Gastlandpräfix (z. B. `HB9/…`). Sonst gibt es keine Punkte. Ausnahme 11 m: siehe D116B. |
+| D116A | Aufbau eines Rufzeichens ("His Call" und "MyCall"): Geprüft wird das Rufzeichen ohne Vor- und Zusätze, die durch einen Schrägstrich abgetrennt sind (z. B. bei `HB9/DL1ABC/P` nur `DL1ABC`). Geprüft werden die vier wichtigsten Bestimmungen: 1) Ein Rufzeichen (ohne allfällige Vor- und Zusätze) besteht aus mindestens drei Zeichen. 2) Als Zeichen sind nur Buchstaben (A-Z) und Ziffern (0-9) zulässig. 3) Mindestens eine Ziffer muss sich an zweiter oder dritter Stelle befinden. 4) Das letzte Zeichen muss ein Buchstabe sein. Ist dieser Aufbau nicht erfüllt, erscheint die Warnung „HBABC is not a valid call sign.“ (deutsch „HBABC ist kein gültiges Rufzeichen.“). Bei "His Call" gilt die Warnung für das QSO (Rahmen D110D, „X“ im Log); bei "MyCall" steht sie unter dem Feld in der Ansicht Station. |
+| D116B | Ist das Band „11 m“, gelten für "His Call" besondere Regeln: Das Rufzeichen muss nicht mit `HB` oder `HE` beginnen; die Warnung nach D115/D116 entfällt, und das QSO zählt Punkte wie jedes andere QSO. Von D116A wird nur Regel 2 geprüft. Die Warnung lautet dann „CB call sign: use only capital letters (A–Z) and digits (0–9). No spaces.“ (deutsch „CB-Rufzeichen: Nur Grossbuchstaben (A–Z) und Ziffern (0–9) verwenden. Keine Leerzeichen.“). |
+| D116C | Zeitpunkt der Prüfung nach D116A ("His Call" und "MyCall"): Regel 2 wird bereits während der Eingabe geprüft; die Warnung erscheint sofort. Regel 3 wird geprüft, sobald das Rufzeichen (ohne Vor- und Zusätze) mindestens drei Zeichen hat. Regeln 1 und 4 werden geprüft, wenn der Benutzer seit drei Sekunden nicht mehr tippt und das Feld nicht leer ist. Beim Verlassen des Feldes bzw. mit Enter werden alle vier Regeln geprüft. |
 | D117 | Jedes gültige QSO ergibt 1 Punkt, auf allen Bändern. |
 | D118 | SSB-Bonus: SSB-QSOs auf 11 m, 2 m und 70 cm zählen 2 Punkte. Auf 80 m und 40 m gibt es keinen Bonus. |
 | D119 | Multiplikator: Jede verschiedene Postleitzahl ("ZIP Rcvd") pro Band ergibt einen Multiplikatorpunkt. |
@@ -237,7 +268,8 @@
 | Nr. | Funktion |
 |---|---|
 | D124 | HB3-Stationen dürfen nicht auf 40 m arbeiten. |
-| D125 | Relais dürfen nur auf 2 m und 70 cm verwendet werden, und nur in FM. |
+| D125 | Relais dürfen nur in FM verwendet werden. Die Relais-Tabelle enthält nur Relais auf 2 m und 70 cm. |
+| D125A | Passt das Band nicht zur Frequenz des gewählten Relais, erscheint die Warnung „The band setting does not match the relay frequency (… MHz = …).“ Das Band des Relais ergibt sich aus seiner Frequenz: um 145 MHz (144–146 MHz) = 2 m, um 435 MHz (430–440 MHz) = 70 cm. Die Auswahl "TRX Route" zeigt nur die Relais des eingestellten Bandes. |
 | D126 | Erlaubte Modes pro Band: 80 m und 40 m nur SSB; 11 m AM, FM und SSB; 2 m und 70 cm direkt SSB und FM; über Relais nur FM. |
 | D127 | Die eigene Postleitzahl darf sich während des Contests nicht ändern. |
 
@@ -253,7 +285,7 @@
 | D129 | CSV-Format: keine Kopfzeile, eine Zeile pro QSO, Trennzeichen `;`, Zeilenende CRLF, Zeichensatz ASCII. |
 | D130 | CSV-Spalten in dieser Reihenfolge: 1 QSO-Nummer (D029); 2 Datum `TT.MM.JJJJ`; 3 Zeit `HH:MM:SS`; 4 "Band" (z. B. `80 m`, `70 cm`); 5 "Mode" (`SSB`, `FM` oder `AM`); 6 "TRX Route" (`DIRECT` oder Relaisname „Call Standort Frequenz“); 7 "His Call"; 8 "RST Send"; 9 "MyZip"; 10 "RST Rcvd"; 11 "ZIP Rcvd"; 12 QSO-Punkt (immer `1`); 13 leer; 14 Punktwert des Mode (`1`, SSB-Bonus `2`); 15 leer; 16 "MyCall" ("used in Log"); 17 Relais-Kennung (z. B. `<Relais-Call>-04`), nur bei Relais-QSOs. |
 | D131 | Bei QSOs ohne Relais bleibt Feld 17 leer, die Zeile endet mit `;`. |
-| D132 | Der Name der CSV-Datei wird automatisch erzeugt: `<MyCall>.CSV`, bei Gruppen `<MyCall>_<Nr>.CSV` (z. B. `MyCall_1.CSV`). |
+| D132 | Der Name der CSV-Datei wird automatisch erzeugt: `<MyCall>.CSV`, bei Gruppen `<MyCall>_<Nr>.CSV` (z. B. `MyCall_1.CSV`). Zusätze wie `/P` werden im Dateinamen weggelassen; ein Gastlandpräfix wird mit `-` angefügt (z. B. `HB9-<Call>.CSV`). |
 | D133 | ADIF: Das Programm exportiert das Log zusätzlich als ADIF-Datei (v3.x) für die Übernahme ins eigene Stationslog. |
 | D134 | Der Name der ADIF-Datei ist `<MyCall>[_<Nr>].ADI`. |
 | D135 | Erfasste Felder, die es in der ADIF-Norm nicht gibt, werden zusammen mit dem Contest-Kurznamen ins ADIF-Feld `NOTES` geschrieben: `SEC 2026; MyPLZ = 0000; HisPLZ = 0000`. |
@@ -270,8 +302,8 @@
 | Nr. | Funktion |
 |---|---|
 | D139 | README und DOCUMENTATION im Projektordner erhalten einen Abschnitt zur Bedienung. |
+| D139A | Beispiele verwenden keine Rufzeichen, die mit "HE" beginnen. |
 | D140 | Die Programmdatei (D017) wird in die Allow-Liste von `.gitignore` aufgenommen. |
-| D141 | Beispiele verwenden nur fiktive Rufzeichen. |
 
 ---
 
@@ -298,3 +330,18 @@
 | D901 | Zu D130: Herkunft bzw. Format der Relais-Kennung in CSV-Spalte 17 klären. Solange dies ungeklärt ist (und der Punkt deshalb hier aufgeführt ist), wird Spalte 17 im CSV mit `unbekannt gemaess D901` ausgefüllt. |
 | D902 | Zu D069: Darf im SEC jedes Relais aus der SEC-Relais-Liste verwendet werden oder nur jene mit dem Eintrag UPS = 1?<br />Solange dies ungeklärt ist (und der Punkt deshalb hier aufgeführt ist), darf jedes Relais aus der Liste verwendet werden. |
 | D903 | Zu D111: Gemäss SEC-Reglement (Kap. 7) besteht eine Doppelverbindung, wenn Rufzeichen, Band und Verbindungsweg (direkt oder über welches Relais) übereinstimmen. So macht es auch die SEC26-Logging-App von Leander HB9RMW. Im Manual V4 (2026-10-23) zu dieser App steht hingegen, eine Doppelverbindung liege nur dann vor, wenn zudem auch der Mode (FM, SSB, AM) übereinstimmt.<br />Im Hinblick auf den SEC 2027 ist abzuklären, wie es künftig sein soll.<br />Solange dies ungeklärt ist (und der Punkt deshalb hier aufgeführt ist), gilt D111. |
+
+---
+
+<br>
+
+## 18. Nicht mehr gültige Bestimmungen
+
+Hier stehen Bestimmungen, die nicht mehr gelten, mit ihrem letzten Wortlaut. Ihre Nummern werden nicht wieder vergeben (C02).
+
+| Nr. | Funktion |
+|---|---|
+| D091 | Auto Next (Standard): Nach dem letzten Pflichtfeld ("ZIP Rcvd") wird das QSO gespeichert und sofort ein neues angelegt.<br />Entfernt in Version 0.03.00, ersetzt durch D092. |
+| D141 | Beispiele verwenden nur fiktive Rufzeichen.<br />Gestrichen am 2026-11-18 (Version 0.16.01), siehe auch D139A. |
+| D092 (alt) | Enter und Speichern: Mit Enter springt man ins nächste Feld. Im letzten Feld ("ZIP Rcvd") springt Enter auf den Knopf „Save“. Ist „Save“ blau hinterlegt (D097A), springt Enter aus jedem Feld direkt auf „Save“. Gespeichert wird mit Enter auf „Save“ oder mit einem Klick darauf; danach steht eine neue Eingabemaske bereit.<br />Geändert in Version 0.13.00. |
+| D125 (Teil) | Relais dürfen nur auf 2 m und 70 cm verwendet werden.<br />Die Warnung dazu wurde in Version 0.10.00 entfernt, ersetzt durch D125A. |

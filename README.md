@@ -6,8 +6,7 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 
 ## Quick start
 
-The program is under development. There is no working version yet.
-Details about the project are in `DOCUMENTATION.md`.
+The program is under development. There is no working version yet. Details about the project are in `DOCUMENTATION.md`.
 
 The specification (see next chapter) of the planned app comprises 193 items:
 

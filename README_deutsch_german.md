@@ -6,8 +6,15 @@ Browserbasiertes Logprogramm für den Swiss Emergency Contest (SEC) der USKA.
 
 ## Schnellstart
 
-Das Programm ist in Entwicklung. Es gibt noch keine lauffähige Version.
-Details zum Projekt stehen in `DOCUMENTATION_deutsch_german.md`.
+Version 0.02.00 ist eine Testversion. Sie ist noch nicht Contest-tauglich.
+
+1. `SEC-Logger-by-HB9EVT.html` in Google Chrome öffnen (Doppelklick, keine Installation nötig).
+2. Unter „Station“ das eigene Rufzeichen (MyCall) und die eigene Postleitzahl (MyZip) erfassen.
+3. Über der Eingabemaske die Sicherungsdatei wählen, am besten auf einem USB-Stick (Pflicht).
+4. Unter „Log“ die QSOs erfassen.
+5. Nach dem Contest unter „Administration“ das Contest-Log als CSV-Datei exportieren.
+
+Die Bedienung ist in `DOCUMENTATION_deutsch_german.md` beschrieben.
 
 Die Spezifikation (vgl. nachfolgendes Kapitel) der geplanten App umfasst 193 Positionen:
 
@@ -35,6 +42,7 @@ Grundlegende Arbeitsregeln für die AI sind im Dokument `CLAUDE.md` geregelt.
 
 ```
 SEC-HTML-Logger/
+├── SEC-Logger-by-HB9EVT.html        # Das Programm (eine einzige Datei)
 ├── CLAUDE.md                        # Regeln für Claude
 ├── README_deutsch_german.md         # Diese Datei
 ├── README.md                        # Englische Übersetzung dieser Datei
@@ -55,11 +63,14 @@ SEC-HTML-Logger/
 ├── design/                          # Eigene Spezifikationen
 │   ├── Funktionsbeschreibung.md     # Funktionsbeschreibung mit Nummern Dnnn
 │   └── Technische-Umsetzung.md      # Technische Umsetzung mit Nummern Tnnn
-└── docs/
-    └── reference/                   # Externe Dokumente (Dritte, nur lesen)
-        ├── README.md
-        ├── Reglement-SEC-2026-DE.pdf
-        └── SEC26-Manual-de_V0003.pdf  # Nicht im Repository
+├── docs/
+│   └── reference/                   # Externe Dokumente (Dritte, nur lesen)
+│       ├── README.md
+│       ├── Reglement-SEC-2026-DE.pdf
+│       └── SEC26-Manual-de_V0003.pdf  # Nicht im Repository
+└── tests/                           # Tests der Programmlogik (Node.js)
+    ├── test-logic.js
+    └── reference/                   # Referenzdateien mit fiktiven Testdaten
 ```
 
 <br>
@@ -70,7 +81,7 @@ Der eigene Programmcode und die eigenen Dokumente stehen unter der MIT-Lizenz (s
 
 Fremdmaterial ist davon ausgenommen und steht unter den Bedingungen der jeweiligen Rechteinhaber (Abschnitt „Third-party material“ in `LICENSE`):
 
-- Postleitzahl-Daten in `data/`: Open Government Data von swisstopo, freie Nutzung mit Quellenangabe (© swisstopo).
+- Postleitzahl-Daten in `data/`: Open Government Data von swisstopo (Schweizer Bundesamt für Landestopografie), freie Nutzung mit Quellenangabe (© swisstopo).
 - Relais-Liste SEC 2026 in `data/`: Rechte noch nicht geklärt.
 - Dokumente in `docs/reference/`: Urheberrecht der jeweiligen Rechteinhaber.
 
@@ -78,5 +89,5 @@ Fremdmaterial ist davon ausgenommen und steht unter den Bedingungen der jeweilig
 
 ## **Autor**
 
-Pepe HB9EVT, https://github.com/pepe-hb9evt
+Pepe HB9EVT, https://github.com/pepe-hb9evt<br>
 mit Unterstützung durch die KI Claude von Anthropic<br>(vgl. Kapitel "Spec-Driven Development with an AI").

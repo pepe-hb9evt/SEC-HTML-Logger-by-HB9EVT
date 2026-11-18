@@ -1,7 +1,6 @@
 # SEC26 Log – Technische Umsetzung
 
-Dieses Dokument beschreibt, wie die Anforderungen aus `Funktionsbeschreibung.md` technisch umgesetzt werden.
-Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient zur Referenzierung in Begleitdokumenten und im Code.
+Dieses Dokument beschreibt, wie die Anforderungen aus `Funktionsbeschreibung.md` technisch umgesetzt werden. Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient zur Referenzierung in Begleitdokumenten und im Code.
 
 ---
 
@@ -25,7 +24,7 @@ Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient z
 | T003 | **IndexedDB** (Datenbank im Browser): sehr sicher. Mit der Option `durability: 'strict'` meldet Chrome eine Transaktion erst als abgeschlossen, wenn die Daten auf der Festplatte stehen. Funktioniert auch über `file://`. Die Speichergrenzen spielen für ein Log keine Rolle. |
 | T004 | **localStorage:** einfach, aber weniger sicher. Chrome schreibt die Daten verzögert auf die Festplatte. Bei einem Stromausfall können die letzten Sekunden verloren gehen. Wird nicht verwendet. |
 | T005 | **Sicherungsdatei** über die Chrome-Funktion *File System Access*: sehr sicher. Chrome schreibt zuerst in eine temporäre Datei und ersetzt die alte Datei erst danach. Die Datei ist darum nie halb geschrieben. Die Datei wird einmal gewählt; nach jedem Neustart von Chrome muss das Schreiben mit einem Klick erneut erlaubt werden. |
-| T006 | **Gewählte Lösung:** IndexedDB als Hauptspeicher (T007), Sicherungsdatei als optionale zweite Sicherung (T010). |
+| T006 | **Gewählte Lösung:** IndexedDB als Arbeitsspeicher (T007), Sicherungsdatei als Pflicht-Sicherung (T010, D042). Weil Chrome für `file://` in der Regel keinen dauerhaften Speicher gewährt (T015), ist die Sicherungsdatei der eigentliche Schutz. |
 
 ---
 
@@ -60,8 +59,8 @@ Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient z
 
 | Nr. | Inhalt |
 |---|---|
-| T014 | Beim Start liest das Programm das Log aus IndexedDB. Ist IndexedDB leer und ist eine Sicherungsdatei bekannt, bietet das Programm an, das Log daraus wiederherzustellen (D045). |
-| T015 | Das Programm ruft `navigator.storage.persist()` auf. Ohne dauerhaften Speicher darf Chrome die Daten löschen, wenn die Festplatte voll wird. Wird die Anfrage abgelehnt, erscheint eine Warnmeldung (D050). |
+| T014 | Beim Start und nach dem Bestätigen der Sicherungsdatei liest das Programm die Sicherungsdatei und vergleicht sie mit IndexedDB (Vergleich wie beim Import „merge“, D047). Fehlen in IndexedDB QSOs, wird die Sicherungsdatei nicht überschrieben, bis der Benutzer entschieden hat (D045). |
+| T015 | Das Programm ruft `navigator.storage.persist()` auf, ohne Meldung. Für `file://` wird die Anfrage in der Regel abgelehnt; der Zustand steht nur in der Administrations-Ansicht (D050). |
 | T016 | Ein Inkognito-Fenster lässt sich nur indirekt erkennen, z. B. an einem auffällig kleinen Speicherkontingent (`navigator.storage.estimate()`). Die Erkennung ist nicht garantiert zuverlässig (D051). |
 
 ---
@@ -74,7 +73,7 @@ Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient z
 |---|---|
 | T017 | **Tab oder Chrome stürzt ab:** Verlust höchstens des QSO in Eingabe. |
 | T018 | **PC-Absturz oder Stromausfall:** Verlust höchstens des QSO in Eingabe (dank `durability: 'strict'`). |
-| T019 | **Browserdaten gelöscht:** ohne Sicherungsdatei geht das ganze Log verloren; mit Sicherungsdatei kein Verlust, das Log wird daraus wiederhergestellt. |
+| T019 | **Browserdaten gelöscht:** kein Verlust. Beim nächsten Start bietet das Programm an, die fehlenden QSOs aus der Sicherungsdatei zu ergänzen (T014). |
 | T020 | **Festplatte defekt:** das ganze Log geht verloren, ausser die Sicherungsdatei liegt auf einem anderen Datenträger. |
 
 ---
@@ -86,3 +85,19 @@ Jeder Wissensblock hat eine eindeutige Nummer `Tnnn` (oder `TnnnX`). Sie dient z
 | Nr. | Inhalt |
 |---|---|
 | T021 | In einem Prototyp prüfen, dass IndexedDB, `durability: 'strict'`, `navigator.storage.persist()` und `showSaveFilePicker` in der aktuellen Chrome-Version über `file://` wie beschrieben funktionieren. |
+
+---
+
+<br>
+
+## 8. Umsetzung in Version 0.01.00
+
+| Nr. | Inhalt |
+|---|---|
+| T022 | Die Postleitzahl-Daten (`data/sec-zip-list.csv`) und die Relais-Liste (`data/SEC2026_Relais-Liste.csv`) sind als Kopie in `<script type="text/plain">`-Blöcken in der Programmdatei enthalten. Über `file://` darf Chrome keine Dateien nachladen (D014). Ändern sich die Dateien in `data/`, müssen die Blöcke nachgeführt werden. |
+| T023 | Die Programmlogik ohne Oberfläche steht im Block `<script id="sec-logic">` (Objekt `SecLogic`). `tests/test-logic.js` liest diesen Block aus der Programmdatei und testet ihn mit Node.js (D143). |
+| T024 | Nur ein Tab darf schreiben (D053): Das Programm hält eine Sperre über die Web Locks API (`navigator.locks`). Ein zweiter Tab erhält die Sperre nicht und arbeitet nur lesend. |
+| T025 | Der ADIF-Export rechnet Datum und Zeit von der lokalen Zeit (HBT) nach UTC um, wie es die ADIF-Norm verlangt. Der CSV-Export behält die lokale Zeit. |
+| T026 | Vor einem Import speichert das Programm das ganze Log in IndexedDB (Schlüssel `preImportSnapshot`, D048). „Undo last import“ stellt es wieder her. |
+| T027 | Fehlt die Dateiauswahl von Chrome (`showSaveFilePicker`), werden CSV und ADIF als normaler Download gespeichert. |
+| T028 | Ist die Sicherungsdatei nicht beschreibbar (z. B. USB-Stick entfernt), meldet `createWritable()` bzw. `write()` einen Fehler. Das Programm zeigt ihn an und schreibt beim nächsten Speichern oder mit „Retry“ wieder das ganze Log (D042B). |
