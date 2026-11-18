@@ -4,17 +4,27 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 
 <br>
 
+## Alpha version - software under development
+
+This log program is currently under development and is only available as an alpha version, which is still being tested thoroughly internally. Your feedback is very welcome once the beta test phase opens, hopefully soon.
+
+<br>
+
 ## Quick start
 
-The program is under development. There is no working version yet. Details about the project are in `DOCUMENTATION.md`.
+1. Open `SEC-Logger-by-HB9EVT.html` in Google Chrome (double-click, no installation needed).
+2. Under "Station", enter your own call sign (MyCall) and your own postal code (MyZip).
+3. Above the entry form, choose the backup file, ideally on a USB stick (mandatory).
+4. Log the QSOs under "Log".
+5. After the contest, export the contest log as a CSV file under "Administration".
 
-The specification (see next chapter) of the planned app comprises 193 items:
+Operation is described in `DOCUMENTATION.md`.
 
-- 22 project rules (see `CLAUDE.md`)
-- 150 items on functionality (see `design/Funktionsbeschreibung.md`)
-- 21 items on technical requirements (see `design/Technische-Umsetzung.md`).
+<br>
 
-Based on this, the app is now being programmed.
+## Documentation
+
+For all details, see the file `DOCUMENTATION.md`.
 
 <br>
 
@@ -34,14 +44,17 @@ The basic working rules for the AI are laid down in the document `CLAUDE.md`.
 
 ```
 SEC-HTML-Logger/
+├── SEC-Logger-by-HB9EVT.html        # The program (one single file)
 ├── CLAUDE.md                        # Rules for Claude
 ├── README_deutsch_german.md         # German original of this file
 ├── README.md                        # This file (English translation)
 ├── DOCUMENTATION_deutsch_german.md  # Detailed documentation
 ├── DOCUMENTATION.md                 # English translation of the documentation
-├── CHANGELOG_deutsch_german.md      # Changelog
+├── CHANGELOG_deutsch_german.md      # Changelog. Not in the repository
 ├── LICENSE                          # License (MIT) and third-party material
 ├── .gitignore                       # Allow-list of the files in the repository
+├── .gitattributes                   # Git settings (line endings)
+├── SEC-HTML-Logger-Testdaten-3000-QSOs.json  # Backup file with 3000 test QSOs. Not in the repository
 ├── data/                            # Reference data used by the app (do not modify)
 │   ├── README.md
 │   ├── sec-zip-list.csv             # Postal codes CH/FL with LV95 coordinates (derived)
@@ -54,11 +67,14 @@ SEC-HTML-Logger/
 ├── design/                          # Own specifications
 │   ├── Funktionsbeschreibung.md     # Functional specification with numbers Dnnn
 │   └── Technische-Umsetzung.md      # Technical implementation with numbers Tnnn
-└── docs/
-    └── reference/                   # External documents (third-party, read-only)
-        ├── README.md
-        ├── Reglement-SEC-2026-DE.pdf
-        └── SEC26-Manual-de_V0003.pdf  # Not in the repository
+├── docs/
+│   └── reference/                   # External documents (third-party, read-only)
+│       ├── README.md
+│       ├── Reglement-SEC-2026-DE.pdf
+│       └── SEC26-Manual-de_V0003.pdf  # Not in the repository
+└── tests/                           # Tests of the program logic (Node.js). Not in the repository
+    ├── test-logic.js
+    └── reference/                   # Reference files with fictitious test data
 ```
 
 <br>
@@ -69,7 +85,7 @@ The own program code and the own documents are licensed under the MIT License (s
 
 Third-party material is excluded from this and remains under the terms of the respective rights holders (section "Third-party material" in `LICENSE`):
 
-- Postal code data in `data/`: Open Government Data from swisstopo, free use with source attribution (© swisstopo).
+- Postal code data in `data/`: Open Government Data from swisstopo (Swiss Federal Office of Topography), free use with source attribution (© swisstopo).
 - Relay list SEC 2026 in `data/`: rights not yet clarified.
 - Documents in `docs/reference/`: copyright of the respective rights holders.
 
@@ -77,5 +93,5 @@ Third-party material is excluded from this and remains under the terms of the re
 
 ## **Author**
 
-Pepe HB9EVT, https://github.com/pepe-hb9evt
+Pepe HB9EVT, https://github.com/pepe-hb9evt<br>
 with support from the AI Claude by Anthropic<br>(see chapter "Spec-Driven Development with an AI").

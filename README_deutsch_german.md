@@ -1,12 +1,16 @@
 # SEC-HTML-Logger
 
-Browserbasiertes Logprogramm für den Swiss Emergency Contest (SEC) der USKA.
+Browserbasiertes Log-Programm für den Swiss Emergency Contest (SEC) der USKA.
+
+<br>
+
+## Alpha-Version - Software in Entwicklung
+
+Dieses Log-Programm ist aktuell in Entwicklung und liegt erst in einer Alpha-Version vor, die noch eingehend intern getestet wird. Deine Rückmeldungen sind herzlich willkommen, wenn hoffentlich in Kürze die Beta-Testphase eröffnet wird.
 
 <br>
 
 ## Schnellstart
-
-Version 0.02.00 ist eine Testversion. Sie ist noch nicht Contest-tauglich.
 
 1. `SEC-Logger-by-HB9EVT.html` in Google Chrome öffnen (Doppelklick, keine Installation nötig).
 2. Unter „Station“ das eigene Rufzeichen (MyCall) und die eigene Postleitzahl (MyZip) erfassen.
@@ -16,13 +20,11 @@ Version 0.02.00 ist eine Testversion. Sie ist noch nicht Contest-tauglich.
 
 Die Bedienung ist in `DOCUMENTATION_deutsch_german.md` beschrieben.
 
-Die Spezifikation (vgl. nachfolgendes Kapitel) der geplanten App umfasst 193 Positionen:
+<br>
 
-- 22 Projektregeln (siehe `CLAUDE.md`)
-- 150 Positionen zur Funktionalität (siehe `design/Funktionsbeschreibung.md`)
-- 21 Positionen bei den technischen Vorgaben (siehe `design/Technische-Umsetzung.md`).
+## Dokumentation
 
-Gestützt darauf wird die App nun programmiert.
+Für alle Details konsultiere die Datei `DOCUMENTATION_deutsch_german.md`.
 
 <br>
 
@@ -48,9 +50,11 @@ SEC-HTML-Logger/
 ├── README.md                        # Englische Übersetzung dieser Datei
 ├── DOCUMENTATION_deutsch_german.md  # Ausführliche Dokumentation
 ├── DOCUMENTATION.md                 # Englische Übersetzung der Dokumentation
-├── CHANGELOG_deutsch_german.md      # Änderungsprotokoll
+├── CHANGELOG_deutsch_german.md      # Änderungsprotokoll. Nicht im Repository
 ├── LICENSE                          # Lizenz (MIT) und Fremdmaterial
 ├── .gitignore                       # Allow-List der Dateien im Repository
+├── .gitattributes                   # Git-Einstellungen (Zeilenenden)
+├── SEC-HTML-Logger-Testdaten-3000-QSOs.json  # Sicherungsdatei mit 3000 Test-QSOs. Nicht im Repository
 ├── data/                            # Referenzdaten für die App (nicht verändern)
 │   ├── README.md
 │   ├── sec-zip-list.csv             # Postleitzahlen CH/FL mit LV95-Koordinaten (abgeleitet)
@@ -68,7 +72,7 @@ SEC-HTML-Logger/
 │       ├── README.md
 │       ├── Reglement-SEC-2026-DE.pdf
 │       └── SEC26-Manual-de_V0003.pdf  # Nicht im Repository
-└── tests/                           # Tests der Programmlogik (Node.js)
+└── tests/                           # Tests der Programmlogik (Node.js). Nicht im Repository
     ├── test-logic.js
     └── reference/                   # Referenzdateien mit fiktiven Testdaten
 ```
