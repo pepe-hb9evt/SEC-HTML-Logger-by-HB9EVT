@@ -10,6 +10,18 @@ This log program is currently under development and is only available as an alph
 
 <br>
 
+## Documentation partly in German
+
+The author has deliberately decided to write certain documents in his native language German, in order to word texts precisely and unambiguously. Part of them has been translated into English:
+
+- `README.md` -- English translation of the German original (`README_deutsch_german.md`).
+- `DOCUMENTATION.md` -- English translation of the German original (`DOCUMENTATION_deutsch_german.md`).
+- Comments in the program code -- all in English.
+- User interface of the program -- German and English (switchable).
+- Specification (Spec-Driven Development) in `design/Funktionsbeschreibung.md` and `design/Technische-Umsetzung.md` -- available in German only.
+
+<br>
+
 ## Quick start
 
 1. Open `SEC-Logger-by-HB9EVT.html` in Google Chrome (double-click, no installation needed).

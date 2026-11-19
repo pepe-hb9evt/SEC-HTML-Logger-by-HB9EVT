@@ -10,6 +10,18 @@ Dieses Log-Programm ist aktuell in Entwicklung und liegt erst in einer Alpha-Ver
 
 <br>
 
+## Dokumentation teilweise auf Deutsch
+
+Der Autor hat sich bewusst entschieden, gewisse Dokumente in seiner Muttersprache Deutsch zu erarbeiten, um Texte präzise und unmissverständlich formulieren zu können. Davon wurde ein Teil ins Englische übersetzt:
+
+- `README.md` -- Englische Übersetzung des deutschsprachigen Originals (`README_deutsch_german.md`).
+- `DOCUMENTATION.md` -- Englische Übersetzung des deutschsprachigen Originals (`DOCUMENTATION_deutsch_german.md`).
+- Kommentare im Programm-Code -- Alles in Englisch.
+- Benutzeroberfläche des Programms -- Deutsch und Englisch (umschaltbar).
+- Spezifikation (Spec-Driven Development) in `design/Funktionsbeschreibung.md` und `design/Technische-Umsetzung.md` -- Nur auf Deutsch vorhanden.
+
+<br>
+
 ## Schnellstart
 
 1. `SEC-Logger-by-HB9EVT.html` in Google Chrome öffnen (Doppelklick, keine Installation nötig).
