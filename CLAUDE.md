@@ -5,9 +5,9 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 <br>
 
 
-| Project phase                      |                                   |
-| ---------------------------------- | --------------------------------- |
-| We are in **"Beta testing phase"** | (only the user changes this line) |
+| Project phase                       |                                   |
+| ----------------------------------- | --------------------------------- |
+| We are in **"Alpha testing phase"** | (only the user changes this line) |
 
 <br>
 
