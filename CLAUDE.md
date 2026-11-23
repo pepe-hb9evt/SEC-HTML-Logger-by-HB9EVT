@@ -16,6 +16,7 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 ### Rule format
 
 - G01 -- Every rule or specification has a unique number:
+  - basic rules `B01`, `B02`, ... (see chapter "Shared rules")
   - general project rules `G01`, `G02`, ...
   - specific project rules `P01`, `P02`, ...
   - design specifications/requirements `D001`, `D002`, ...
@@ -30,7 +31,7 @@ Browser-based log program for the Swiss Emergency Contest (SEC) of the USKA.
 
 @../CLAUDE.md
 
-- G05 -- Also follow the rules in the CLAUDE.md of the parent folder `Pepe-AI-Aera` (imported above), which are numbered B01 to B99.
+- G05 -- Also follow the rules in the CLAUDE.md of the parent folder `Pepe-AI-Aera` (imported above), which are numbered `B01`, `B02`, ...
 - G06 -- If a basic rule (`Bnn`) conflicts with a rule in this file (`Gnn` or `Pnn`), the rule in this file takes precedence.
 
 <br>
