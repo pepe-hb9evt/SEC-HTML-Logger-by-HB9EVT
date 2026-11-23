@@ -8,7 +8,7 @@
 | D002 | Während der Entwicklung, der Beta-Tests und der Weiterentwicklung sind Anpassungen und Ergänzungen möglich. Bei Anpassungen im Rahmen der Weiterentwicklung ist jeweils anzugeben, ab welcher Programmversion sie gelten. |
 | D003 | Programmversion: Sie hat die Form `MAJOR.MINOR.PATCH`; MINOR und PATCH sind von Beginn an zweistellig. Vor der ersten Contest-tauglichen Version gilt `0.xx.yy` (erste Version `0.01.00`), danach `1.xx.yy`. |
 | D004 | MAJOR wird erhöht, wenn sich das Format der Sicherungsdatei so ändert, dass ältere Sicherungsdateien nicht mehr eingelesen werden können. MINOR wird bei neuen Funktionen erhöht, PATCH bei Fehlerkorrekturen. |
-| D005 | Die Versionsnummer steht an genau einer Stelle im Programmcode. Sie wird in der Administrations-Ansicht und in der Statuszeile angezeigt und in die Sicherungsdatei, in den ADIF-Export (Feld `PROGRAMVERSION`) und in jeden Eintrag des Changelogs geschrieben. Git-Tags setzt der Benutzer selbst (vgl. C21). |
+| D005 | Die Versionsnummer steht an genau einer Stelle im Programmcode. Sie wird in der Administrations-Ansicht und in der Statuszeile angezeigt und in die Sicherungsdatei, in den ADIF-Export (Feld `PROGRAMVERSION`) und in jeden Eintrag des Changelogs geschrieben. Git-Tags setzt der Benutzer selbst (vgl. B25). |
 | D006 | In diesem Dokument hat jede Bestimmung eine eindeutige Nummer `Dnnn` (oder `DnnnX`). Sie dient zur Referenzierung in Begleitdokumenten und im Code. |
 | D007 | Dieses Dokument setzt voraus, dass der Leser die üblichen Fachbegriffe des Amateurfunks kennt, Contest-Erfahrung hat und mit dem Swiss Emergency Contest (SEC) und seinem eigenartigen Regelwerk (vgl. D009A) vertraut ist. |
 | D008 | Bestimmungen mit dem Vermerk (Wunsch) beschreiben eine erwünschte, aber nicht zwingende Funktion. Alle übrigen Bestimmungen sind Pflicht. |
@@ -313,7 +313,7 @@
 
 | Nr. | Funktion |
 |---|---|
-| D142 | Getestet wird nur mit eigens erstellten Testdaten oder mit Testdaten, die der Benutzer zur Verfügung stellt, nie mit echten Logs (P21 in `CLAUDE.md`). |
+| D142 | Getestet wird nur mit eigens erstellten Testdaten oder mit Testdaten, die der Benutzer zur Verfügung stellt, nie mit echten Logs (P12 in `CLAUDE.md`). |
 | D143 | Die Logik (Punkte, Dupe-Prüfung, Plausibilität, CSV- und ADIF-Export) wird ohne Oberfläche gegen Referenzdateien getestet. |
 | D144 | Pannen werden simuliert: Speicherfehler, verweigerte Berechtigung, Import einer defekten Datei. |
 | D145 | Die Grenze von 0.4 Sekunden (D041) wird mit einem grossen Log gemessen, z. B. 2000 QSOs. |
@@ -337,7 +337,7 @@
 
 ## 18. Nicht mehr gültige Bestimmungen
 
-Hier stehen Bestimmungen, die nicht mehr gelten, mit ihrem letzten Wortlaut. Ihre Nummern werden nicht wieder vergeben (C02).
+Hier stehen Bestimmungen, die nicht mehr gelten, mit ihrem letzten Wortlaut. Ihre Nummern werden nicht wieder vergeben (G02).
 
 | Nr. | Funktion |
 |---|---|

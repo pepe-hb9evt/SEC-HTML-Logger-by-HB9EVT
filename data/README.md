@@ -2,7 +2,7 @@
 
 **Project SEC-HTML-Logger** – reference data for the program.
 
-Do not change the files in this folder without explicit permission (rule P03 in `CLAUDE.md`).
+Do not change the files in this folder without explicit permission (rule P01 in `CLAUDE.md`).
 
 <br>
 

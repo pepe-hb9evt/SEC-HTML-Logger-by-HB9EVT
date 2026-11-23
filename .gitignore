@@ -1,4 +1,4 @@
-# Allow-list: ignore everything, then allow each file explicitly (see CLAUDE.md C29)
+# Allow-list: ignore everything, then allow each file explicitly (see CLAUDE.md G17)
 *
 !*/
 
